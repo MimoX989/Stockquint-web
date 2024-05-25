@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -14,11 +14,15 @@ import Image from "next/image";
 import MenuItems from "./menu-items";
 import Clock from "react-live-clock";
 import { color } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { AppContext } from "@/app/utils/providers";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function TopNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const { user, error, isLoading } = useUser();
+  const ctxdata = useContext(AppContext);
+  const router = useRouter();
+  const supabase = createClientComponentClient();
 
   const topNavData = [
     {
@@ -43,8 +47,14 @@ export default function TopNavbar() {
     },
   ];
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    ctxdata.setIsAuth(false);
+    router.replace("/login");
+  };
+  console.log(ctxdata.user);
   return (
-    <Navbar maxWidth="full" onMenuOpenChange={setIsMenuOpen}>
+    <Navbar maxWidth="full" isBordered="true" onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -99,10 +109,12 @@ export default function TopNavbar() {
           </div>
         </NavbarItem>
         <NavbarItem className=" lg:flex">
-          {/* <Avatar isBordered color="primary" src={user ? user.picture : null} /> */}
+          <Avatar isBordered color="primary" src={ctxdata.user ? null : null} />
         </NavbarItem>
       </NavbarContent>
-      <MenuItems />
+      <MenuItems
+        value={{ isAuth: ctxdata.isAuth, handleLogout: handleLogout }}
+      />
     </Navbar>
   );
 }

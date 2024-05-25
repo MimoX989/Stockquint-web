@@ -15,7 +15,9 @@ import { AppContext } from "@/app/utils/providers";
 function IndicesDropdown(props) {
   const [symbol, setSymbol] = useState("NIFTY");
   const [isLoading, setIsLoading] = useState(false);
-  const symbolData = useContext(AppContext);
+  const ctxData = useContext(AppContext);
+  const [uVal, setuVal] = useState("--:--");
+  const [timestamp, setTimestamp] = useState("--");
 
   const items = [
     {
@@ -41,27 +43,36 @@ function IndicesDropdown(props) {
   ];
 
   useEffect(() => {
-    getData;
-    return getData;
-  }, []);
+    {
+      if (ctxData.symData.records) {
+        <>
+          {setuVal(ctxData.symData.records.underlyingValue)};
+          {setTimestamp(ctxData.symData.records.timestamp)};
+        </>;
+      }
+    }
+  }, [ctxData.symData]);
 
-  async function getData() {
+  useEffect(() => {
+    getData();
+  }, [ctxData.selectExp]);
+
+  const getData = async () => {
     setIsLoading(true);
-
     try {
       const res = await fetch("/api/fetch-fno-data", {
         method: "POST",
-        body: JSON.stringify(symbol),
+        body: JSON.stringify({ symbol: symbol, selExp: ctxData.selectExp }),
       });
       const data = await res.json();
-      await symbolData.setSymData(data);
+      await ctxData.setSymData(data);
       console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error(error);
       setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col gap-2">
@@ -121,17 +132,12 @@ function IndicesDropdown(props) {
               width={15}
             />
             <p className="text-slate-400 text-right">
-              Last Updated:{" "}
-              <p className="text-white text-right">
-                {symbolData.symData.records.timestamp}
-              </p>
+              Last Updated: <p className="text-white text-right">{timestamp}</p>
             </p>
           </div>
           <div className="my-4">
             <p className="text-large text-pink-400">{symbol}</p>
-            <p className="text-4xl">
-              {symbolData.symData.records.underlyingValue}
-            </p>
+            <p className="text-4xl">{uVal}</p>
           </div>
         </div>
       </div>

@@ -10,26 +10,26 @@ function page() {
   return (
     <div className="grid grid-cols-6 grid-rows-9 gap-2 w-full">
       <div className="crd-holder col-span-6 row-span-1 row-start-1 h-full">
-        {/* <Timeline /> */}
+        <Timeline />
       </div>
-      <div className="crd-holder col-span-2 row-start-2 row-span-4 h-full"></div>
+      <div className="crd-holder col-span-2 row-start-2 row-span-4 h-full"><Indices /></div>
       <div className="crd-holder col-span-3 row-span-4 row-start-2 h-full">
-        {/* <Stockchart /> */}
+        <Stockchart />
       </div>
       <div className="crd-holder row-span-2 col-start-6 row-start-2 h-full">
-        4
+        {/* 4 */}
       </div>
       <div className="crd-holder row-span-2 col-start-6 row-start-4 h-full">
-        5
+        {/* 5 */}
       </div>
       <div className="crd-holder col-span-2 row-span-full col-start-1 row-start-6">
-        <Indices />
+        
       </div>
       <div className="crd-holder row-span-full col-start-3 col-span-3 row-start-6">
-        {/* <Watchlist /> */}
+        <Watchlist />
       </div>
       <div className="crd-holder col-span-1 row-span-full col-start-6 row-start-6">
-        6
+        {/* 6 */}
       </div>
     </div>
   );

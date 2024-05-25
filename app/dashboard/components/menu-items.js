@@ -57,11 +57,10 @@ const MenuItems = (props) => {
         </NavbarMenuItem>
       ))}
       <NavbarMenuItem className="flex justify-center">
-        {props.isAuth ? (
+        {props.value.isAuth ? (
           <Button
-            as={Link}
             className="w-full my-16 md:w-2/5 text-warning-500"
-            href="/api/auth/logout"
+            onClick={props.value.handleLogout}
             size="lg"
           >
             Logout
@@ -70,7 +69,7 @@ const MenuItems = (props) => {
           <Button
             as={Link}
             className="w-full my-16 md:w-2/5 text-warning-500"
-            href="/api/auth/login"
+            href="/login"
             size="lg"
           >
             Log In

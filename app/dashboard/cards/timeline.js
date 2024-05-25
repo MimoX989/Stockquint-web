@@ -7,8 +7,8 @@ import DaynightDisplay from "../components/daynight-display";
 import Clock from "react-live-clock";
 
 const Timeline = () => {
-  const marketStatus = useContext(AppContext);
-  const [mktStatus,setMktStatus] = useState();
+  const marketData = useContext(AppContext);
+  const [mktStatus, setMktStatus] = useState("--");
   const initialTime = new Date();
   initialTime.setHours(9, 15, 0);
   const finalTime = new Date();
@@ -31,11 +31,12 @@ const Timeline = () => {
 
   useEffect(() => {
     {
-      marketStatus != null
-        ? setMktStatus(marketStatus.marketState[0].marketStatus)
-        : setMktStatus("--");
+      console.log(marketData);
+      marketData.marketStatus
+        ? setMktStatus(marketData.marketStatus.marketState[0].marketStatus)
+        : null;
     }
-  }, [marketStatus]);
+  }, [marketData]);
 
   return (
     <Card fullWidth={true} className="h-full">

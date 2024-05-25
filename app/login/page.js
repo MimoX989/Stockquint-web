@@ -21,7 +21,12 @@ function Page() {
       <div className="p-5">
         <h3>Welcome to Stockquint</h3>
       </div>
-      <Tabs key={types} variant="underlined" aria-label="Tabs">
+      <Tabs
+        key={types}
+        defaultSelectedKey={"login"}
+        variant="underlined"
+        aria-label="Tabs"
+      >
         <Tab key="login" title="Login">
           <LoginForm />
         </Tab>

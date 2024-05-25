@@ -5,18 +5,17 @@ import React, { useContext, useEffect, useState } from "react";
 function ExpiryList() {
   const symbolData = useContext(AppContext);
   const [exp, setExp] = useState([]);
-  const [selectExp, setSelectExp] = useState("");
 
   useEffect(() => {
-    return setExp(symbolData.symData.records.expiryDates);
-  }, [symbolData.symData.records.expiryDates]);
-
-  async function loadTableData(exindex) {
-    setSelectExp(exindex);
-    console.log(selectExp);
-    try {
-    } catch (error) {}
-  }
+    if (symbolData.symData.records) {
+      setExp(symbolData.symData.records.expiryDates);
+    } else {
+      setExp([]);
+    }
+  }, [symbolData.symData]);
+  // useEffect(() => {
+  //   setExp(symbolData.symData.records.expiryDates);
+  // }, [symbolData.symData.records.expiryDates]);
 
   return (
     <div>
@@ -31,7 +30,9 @@ function ExpiryList() {
                 <Button
                   type="button"
                   variant="ghost"
-                  onClick={() => loadTableData(index)}
+                  onClick={() => {
+                    symbolData.setSelectExp(index);
+                  }}
                 >
                   {index}
                 </Button>{" "}

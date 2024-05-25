@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Input, Link, Spinner } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -8,17 +8,21 @@ export default function LoginForm(props) {
   const [password, setPassword] = useState("");
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
-  // console.log(props.value);
   const supabase = createClientComponentClient();
 
   const handleSignIn = async () => {
     setLoading(true);
     try {
-      await supabase.auth.signInWithPassword({
+      const res = await supabase.auth.signInWithPassword({
         email,
         password,
       });
-      
+      console.log(res.data);
+      {
+        res.data.session != null
+          ? router.push("/dashboard")
+          : console.log("Wrong Authentication!");
+      }
     } catch (error) {
       console.log(error);
     }

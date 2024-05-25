@@ -8139,27 +8139,15 @@ const Providers = ({ children }) => {
       ],
       timestamp: "-- --:--:--",
       underlyingValue: "--.--",
-      strikePrices: [
-        12000, 13000, 14000, 15000, 16000, 16500, 17000, 18000, 18500, 19000,
-        19500, 20000, 20050, 20100, 20150, 20200, 20250, 20300, 20350, 20400,
-        20450, 20500, 20550, 20600, 20650, 20700, 20750, 20800, 20850, 20900,
-        20950, 21000, 21050, 21100, 21150, 21200, 21250, 21300, 21350, 21400,
-        21450, 21500, 21550, 21600, 21650, 21700, 21750, 21800, 21850, 21900,
-        21950, 22000, 22050, 22100, 22150, 22200, 22250, 22300, 22350, 22400,
-        22450, 22500, 22550, 22600, 22650, 22700, 22750, 22800, 22850, 22900,
-        22950, 23000, 23050, 23100, 23150, 23200, 23250, 23300, 23350, 23400,
-        23450, 23500, 23550, 23600, 23650, 23700, 23750, 23800, 23850, 23900,
-        23950, 24000, 24050, 24100, 24150, 24200, 24250, 24300, 24350, 24400,
-        24450, 24500, 25000, 26000, 27000, 28000,
-      ],
+      strikePrices: [0o0],
     },
     filtered: {
       data: [
         {
-          strikePrice: 20250,
+          strikePrice: 0o0,
           expiryDate: "09-May-2024",
           PE: {
-            strikePrice: 20250,
+            strikePrice: 0o0,
             expiryDate: "09-May-2024",
             underlying: "NIFTY",
             identifier: "OPTIDXNIFTY09-05-2024PE20250.00",
@@ -8180,7 +8168,7 @@ const Providers = ({ children }) => {
             underlyingValue: 22442.7,
           },
           CE: {
-            strikePrice: 20250,
+            strikePrice: 0o0,
             expiryDate: "09-May-2024",
             underlying: "NIFTY",
             identifier: "OPTIDXNIFTY09-05-2024CE20250.00",
@@ -8213,8 +8201,10 @@ const Providers = ({ children }) => {
     },
   };
   const [isAuth, setIsAuth] = useState(false);
+  const [user, setUser] = useState(null);
   const [symData, setSymData] = useState(exdata);
   const [marketStatus, setMarketStatus] = useState(null);
+  const [selectExp, setSelectExp]=useState("");
 
   useEffect(() => {
     getMktStat();
@@ -8232,7 +8222,19 @@ const Providers = ({ children }) => {
   return (
     <NextUIProvider>
       <NextThemesProvider attribute="class" defaultTheme="dark">
-        <AppContext.Provider value={{ marketStatus, symData, setSymData }}>
+        <AppContext.Provider
+          value={{
+            marketStatus,
+            symData,
+            setSymData,
+            user,
+            setUser,
+            isAuth,
+            setIsAuth,
+            selectExp,
+            setSelectExp
+          }}
+        >
           {children}
         </AppContext.Provider>
       </NextThemesProvider>

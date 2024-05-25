@@ -1,0 +1,50 @@
+<div class="nl-container" style="width: 100%; background-color: #FFFFFF; text-align: center;">
+    <div class="row-content" style="color: #000000; width: 700px; margin: 0 auto; padding: 30px 0 20px;">
+        <div style="padding: 10px; color: #000000; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 30px; line-height: 36px; text-align: left;">
+            <p style="margin: 0;"><span style="color: #1a1919;"><strong>Stockquint</strong></span></p>
+        </div>
+    </div>
+
+    <div class="row-content" style="color: #000000; width: 700px; margin: 0 auto; padding-top: 40px; background: #4a65ad url('https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/0db9f180-d222-4b2b-9371-cf9393bf4764/a31367d3-56d9-4984-bf48-79331695a0bc/galaxy-bg.png') top center no-repeat;">
+        <div style="padding: 30px 10px 10px;">
+            <div style="font-family: Arial, Helvetica Neue, Helvetica, sans-serif; color: #ffffff; font-size: 30px; text-align: center;">
+                <p style="margin: 0;"><strong>Please confirm your SignUp.</strong></p>
+            </div>
+        </div>
+        <div style="padding: 10px 20px;">
+            <div style="font-family: Arial, Helvetica Neue, Helvetica, sans-serif; color: #d8ebf8; font-size: 16px; text-align: center; line-height: 1.5;">
+                <p style="margin: 0;">This mail is for verification purpose, please click on confirm to get your e-mail verified with us.</p>
+                <p style="margin: 0;">You will be redirected to the login page. If not, please log in to enjoy full features with us.. :)</p>
+            </div>
+        </div>
+        <div style="padding: 30px 10px 50px;">
+            <a href="{{ .ConfirmationURL }}" target="_blank" style="text-decoration: none; display: inline-block; color: #ffffff; background-color: #3AAEE0; border-radius: 30px; padding: 8px 40px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 16px; text-align: center;">
+                <strong>Confirm Email</strong>
+            </a>
+        </div>
+    </div>
+
+    <div class="row-content" style="color: #000000; width: 700px; margin: 0 auto; padding: 5px 0 40px;">
+        <div style="padding: 10px;"></div>
+    </div>
+
+    <div class="row-content" style="color: #000000; width: 700px; margin: 0 auto; padding: 25px 0;">
+        <div style="padding: 10px;">
+            <div style="font-family: Arial, Helvetica Neue, Helvetica, sans-serif; color: #555555; font-size: 14px; text-align: center;">
+                <p style="margin: 0;">This email is automatically generated from server.</p>
+            </div>
+        </div>
+        <div style="padding: 10px; text-align: center;">
+            <div class="social-table" style="display: inline-block;font-family: Arial, Helvetica Neue, Helvetica, sans-serif; color: #555555; font-size: 14px; text-align: center;">
+               <p style="margin: 0;">For any query mail us at: xyz@cda.com</p>
+            </div>
+        </div>
+        <div style="padding: 10px;">
+            <div style="font-family: Arial, Helvetica Neue, Helvetica, sans-serif; color: #555555; font-size: 12px; text-align: center;">
+                <p style="margin: 0;"><strong>StkQ Technologies</strong></p>
+                <p style="margin: 0;">CA, North Texas, US</p>
+                <p style="margin: 0;">&nbsp;</p>
+            </div>
+        </div>
+    </div>
+</div>
