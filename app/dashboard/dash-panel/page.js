@@ -12,7 +12,9 @@ function page() {
       <div className="crd-holder col-span-6 row-span-1 row-start-1 h-full">
         <Timeline />
       </div>
-      <div className="crd-holder col-span-2 row-start-2 row-span-4 h-full"><Indices /></div>
+      <div className="crd-holder col-span-2 row-start-2 row-span-4 h-full">
+        <Indices />
+      </div>
       <div className="crd-holder col-span-3 row-span-4 row-start-2 h-full">
         <Stockchart />
       </div>
@@ -22,15 +24,13 @@ function page() {
       <div className="crd-holder row-span-2 col-start-6 row-start-4 h-full">
         {/* 5 */}
       </div>
-      <div className="crd-holder col-span-2 row-span-full col-start-1 row-start-6">
-        
-      </div>
-      <div className="crd-holder row-span-full col-start-3 col-span-3 row-start-6">
+      <div className="crd-holder col-span-2 row-span-full col-start-1 row-start-6"></div>
+      <div className="crd-holder row-span-full col-start-3 col-span-6 row-start-6">
         <Watchlist />
       </div>
-      <div className="crd-holder col-span-1 row-span-full col-start-6 row-start-6">
-        {/* 6 */}
-      </div>
+      {/* <div className="crd-holder col-span-1 row-span-full col-start-6 row-start-6">
+        6
+      </div> */}
     </div>
   );
 }

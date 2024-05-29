@@ -1,7 +1,7 @@
 "use client";
 import React, { Suspense, useContext, useEffect, useState } from "react";
 import IndicesDropdown from "../components/indices-dropdown";
-import OiDataTable from "../components/oi-table";
+import OiDataTable2 from "../components/oi-table2";
 import { AppContext } from "@/app/utils/providers";
 import ExpiryList from "../components/expiry-list";
 
@@ -17,7 +17,7 @@ function page() {
       <div className="crd-holder col-span-4 row-start-1 row-span-9 h-full">
         <ExpiryList />
         <Suspense fallback={<p>Loading...!</p>}>
-          <OiDataTable />
+          <OiDataTable2/>
         </Suspense>
       </div>
       <div className="crd-holder col-span-1 row-span-9 row-start-1 h-full">

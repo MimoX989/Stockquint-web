@@ -1,14 +1,14 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
-
+import niftyData from "@/public/nifty.json";
 export async function POST(req, res) {
   const sym = await req.json();
   try {
-    const result = await fetch(
-      `https://www.nseindia.com/api/option-chain-indices?symbol=` + sym.symbol
-    );
-    const data = await result.json();
-    // saveData(sym, data);
+    // const result = await fetch(
+    //   `https://www.nseindia.com/api/option-chain-indices?symbol=` + sym.symbol
+    // );
+
+    const data = await niftyData;
+    // console.log({ data });
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(error);

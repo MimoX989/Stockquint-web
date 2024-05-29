@@ -14,9 +14,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       {/* <UserProvider> */}
-        <body className={`${inter.className}`}>
-          <Providers>{children}</Providers>
-        </body>
+      <body suppressHydrationWarning={true} className={`${inter.className}`}>
+        <Providers>{children}</Providers>
+      </body>
       {/* </UserProvider> */}
     </html>
   );

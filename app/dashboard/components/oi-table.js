@@ -1,20 +1,15 @@
 "use client";
 import { AppContext } from "@/app/utils/providers";
 import { Button, Spinner } from "@nextui-org/react";
-import React, {
-  Suspense,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { InfinitySpin } from "react-loader-spinner";
+import { forEach } from "underscore";
 
 function oiDataTable() {
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const ctxdata = useContext(AppContext);
   const [tabData, setTabData] = useState([]);
-  const [expDate, setExpDate] = useState();
+  const [expDate, setExpDate] = useState("");
   const [uvalue, setUvalue] = useState();
   const [dataArray, setDataArray] = useState(null);
 
@@ -25,14 +20,14 @@ function oiDataTable() {
       setTabData(ctxdata.symData.records.data);
       setDataArray(loadData(tabData));
     }
-  }, [ctxdata.symData]);
+  }, [ctxdata]);
 
-  function loadData(data) {
+  function loadData(tabData) {
     setLoading(true);
     var strikeArray = new Array();
+    console.log({ expDate });
     const atm = Math.round(uvalue / 50, 0) * 50;
-    console.log(expDate);
-    data.forEach((e, index) => {
+    tabData.forEach((e, index) => {
       if (
         e.expiryDate === expDate &&
         e.strikePrice >= atm - 200 &&
@@ -52,25 +47,32 @@ function oiDataTable() {
           peiv: e.PE.impliedVolatility,
           peiv: e.PE.lastPrice,
         });
-        // console.log(strikeArray);
       }
+      // console.log(e);
     });
+    console.log(strikeArray);
+
+    function minmax() {
+      
+        strikeArray.forEach((element) => {
+          return element.cettv;
+        })
+      ;
+      console.log({ mx });
+    }
+    minmax();
+
     setLoading(false);
     return strikeArray.map((items) => {
-      console.log(items);
-      let largest = 0;
-      let scndlargest = 0;
       let styleAtm = "";
-      const max_cettv = (items)=>{
-        Math.max.apply(null,list.map((o)=>{return o.cettv}))
-      }
-     
-     
+
       return (
         <tr key={items.strike}>
-          {(styleAtm = () => {
-            return items.strike == atm ? `bg-yellow-400 text-black` : ``;
-          })}
+          {
+            (styleAtm = () => {
+              return items.strike == atm ? `bg-yellow-400 text-black` : ``;
+            })
+          }
 
           <td className="border-1">{items.ceoi}</td>
           <td className="border-1">{items.cecoi}</td>
@@ -91,8 +93,8 @@ function oiDataTable() {
     <div className="overflow-auto w-full m-4" id="table_component">
       {isLoading == true ? (
         <div className={"flex my-8 h-48 w-full items-center justify-center"}>
-          {" "}
-          <InfinitySpin width="200" height="200" />
+          {/* <Spinner />; */}
+          <InfinitySpin width="100" height="100" />
         </div>
       ) : (
         <table className="border-1 border-solid text-center border-spacing-1 table-fixed w-full h-full">
@@ -111,23 +113,7 @@ function oiDataTable() {
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
-            {dataArray}
-            {/* {dataArray.map((items, index) => {
-              <tr key={items}>
-                {<td>{items.strike}</td>}
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>;
-            })} */}
-          </tbody>
+          <tbody>{dataArray}</tbody>
         </table>
       )}
     </div>
