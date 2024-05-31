@@ -104,78 +104,150 @@ function oiDataTable2() {
 
     setLoading(false);
     return strikeArray.map((items, index) => {
-      let styleAtm = "";
-      let styleTtvCE = "";
-      let styleTtvPE = "";
-      let styleCoiCE = "";
-      let styleCoiPE = "";
+      let styleAtm = () => {
+        return items.strike == atm ? `bg-yellow-400 text-black` : ``;
+      };
+      let styleTtvCE = () => {
+        if (items.cettv == cettv1) {
+          return `bg-red-800 border-1`;
+        } else if (items.cettv == cettv2) {
+          return `bg-red-500 border-1`;
+        } else {
+          return `border-1`;
+        }
+      };
+      let styleTtvPE = () => {
+        if (items.pettv == pettv1) {
+          return `bg-blue-700 border-1`;
+        } else if (items.pettv == pettv2) {
+          return `bg-blue-400 border-1`;
+        } else {
+          return `border-1`;
+        }
+      };
+
+      let styleCoiCE = () => {
+        if (items.cecoi == cecoi1) {
+          return `bg-red-800 border-1`;
+        } else if (items.cecoi == cecoi2) {
+          return `bg-red-500 border-1`;
+        } else {
+          return `border-1`;
+        }
+      };
+      let styleCoiPE = () => {
+        if (items.pecoi == pecoi1) {
+          return `bg-blue-700 border-1`;
+        } else if (items.pecoi == pecoi2) {
+          return `bg-blue-400 border-1`;
+        } else {
+          return `border-1`;
+        }
+      };
 
       return (
-        <TableRow>
-          {
-            (styleAtm = () => {
-              return items.strike == atm ? `bg-yellow-400 text-black` : ``;
-            })
-          }
-          {
-            (styleTtvCE = () => {
-              if (items.cettv == cettv1) {
-                return `bg-red-800 border-1`;
-              } else if (items.cettv == cettv2) {
-                return `bg-red-500 border-1`;
-              } else {
-                return `border-1`;
-              }
-            })
-          }
-          {
-            (styleCoiCE = () => {
-              if (items.cecoi == cecoi1) {
-                return `bg-red-800 border-1`;
-              } else if (items.cecoi == cecoi2) {
-                return `bg-red-500 border-1`;
-              } else {
-                return `border-1`;
-              }
-            })
-          }
-          {
-            (styleCoiPE = () => {
-              if (items.pecoi == pecoi1) {
-                return `bg-blue-700 border-1`;
-              } else if (items.pecoi == pecoi2) {
-                return `bg-blue-400 border-1`;
-              } else {
-                return `border-1`;
-              }
-            })
-          }
-          {
-            (styleTtvPE = () => {
-              if (items.pettv == pettv1) {
-                return `bg-blue-700 border-1`;
-              } else if (items.pettv == pettv2) {
-                return `bg-blue-400 border-1`;
-              } else {
-                return `border-1`;
-              }
-            })
-          }
-          <TableCell className="border-1">{items.ceoi}</TableCell>
-          <TableCell className={styleCoiCE()}>{items.cecoi}</TableCell>
-          <TableCell className={styleTtvCE()}>{items.cettv}</TableCell>
-          <TableCell className={styleAtm()}>{items.strike}</TableCell>
-          <TableCell className={styleTtvPE()}>{items.pettv}</TableCell>
-          <TableCell className={styleCoiPE()}>{items.pecoi}</TableCell>
-          <TableCell className="border-1">{items.peoi}</TableCell>
-          {() => {
-            if (index == 0) {
-              return `<TableCell className="border-1"></TableCell>
-              <TableCell className="border-1"></TableCell>
-              <TableCell className="border-1"></TableCell>`;
+        <tr>
+          <td className="border-1">{items.ceoi}</td>
+          <td className={styleCoiCE()}>{items.cecoi}</td>
+          <td className={styleTtvCE()}>{items.cettv}</td>
+          <td className={styleAtm()}>{items.strike}</td>
+          <td className={styleTtvPE()}>{items.pettv}</td>
+          <td className={styleCoiPE()}>{items.pecoi}</td>
+          <td className="border-1">{items.peoi}</td>
+          {index == 0 ? (
+            <>
+              <td
+                rowSpan="4"
+                className={
+                  total_ceoi > total_peoi ? `bg-blue-500 border-1` : `border-1`
+                }
+              >
+                {total_ceoi}
+              </td>
+              <td
+                rowSpan="4"
+                className={
+                  total_peoi > total_ceoi ? `bg-red-700 border-1` : `border-1`
+                }
+              >
+                {total_peoi}
+              </td>
+              <td rowSpan="4" className="border-1">
+                {total_ceoi > total_peoi
+                  ? "OI: Call Writing"
+                  : "OI: Put Writing"}
+              </td>
+            </>
+          ) : null}
+          {index == 4 ? (
+            <>
+              <td
+                className={
+                  total_cecoi > total_pecoi
+                    ? `bg-blue-500 border-1`
+                    : `border-1`
+                }
+              >
+                {total_cecoi}
+              </td>
+              <td
+                className={
+                  total_pecoi > total_cecoi ? `bg-red-700 border-1` : `border-1`
+                }
+              >
+                {total_pecoi}
+              </td>
+              <td className="border-1">
+                {total_cecoi > total_pecoi
+                  ? "COI: Call Writing"
+                  : "COI: Put Writing"}
+              </td>
+            </>
+          ) : null}
+          {index == 5 ? (
+            <>
+              <td
+                rowSpan="4"
+                className={
+                  total_cemv > total_pemv ? `bg-blue-500 border-1` : `border-1`
+                }
+              >
+                {total_cemv}
+              </td>
+              <td
+                rowSpan="4"
+                className={
+                  total_pemv > total_cemv ? `bg-red-700 border-1` : `border-1`
+                }
+              >
+                {total_pemv}
+              </td>
+              <td rowSpan="4" className="border-1">
+                {total_cemv > total_pemv
+                  ? "MV: Call Writing"
+                  : "MV: Put Writing"}
+              </td>
+            </>
+          ) : null}
+          {/* <TableCell
+            rowSpan={index == 0 || index == 5 ? 4 : null}
+            className={
+              items.strike == atm || index == 0 || index == 5 ? `border-1` : ``
             }
-          }}
-        </TableRow>
+          ></TableCell>
+          <TableCell
+            rowSpan={index == 0 || index == 5 ? 4 : null}
+            className={
+              items.strike == atm || index == 0 || index == 5 ? `border-1` : ``
+            }
+          ></TableCell>
+          <TableCell
+            rowSpan={index == 0 || index == 5 ? 4 : null}
+            className={
+              items.strike == atm || index == 0 || index == 5 ? `border-1` : ``
+            }
+          ></TableCell> */}
+        </tr>
       );
     });
   }
@@ -188,27 +260,23 @@ function oiDataTable2() {
           <InfinitySpin width="100" height="100" />
         </div>
       ) : (
-        <Table fullWidth layout="fixed">
-          <TableHeader className="border-1 p-1 text-sm text-amber-400 ">
-            <TableColumn>OI</TableColumn>
-            <TableColumn>OI Chg</TableColumn>
-            <TableColumn className="text-wrap">
-              Turnover Vol(Million)
-            </TableColumn>
-            <TableColumn>Strike Price</TableColumn>
-            <TableColumn className="text-wrap">
-              Turnover Vol(Million)
-            </TableColumn>
-            <TableColumn>OI Chg</TableColumn>
-            <TableColumn>OI</TableColumn>
-            <TableColumn>CE Change</TableColumn>
-            <TableColumn>PE Change</TableColumn>
-            <TableColumn>Status</TableColumn>
-          </TableHeader>
-          <TableBody emptyContent={"No rows to display."}>
+        <table fullWidth layout="fixed">
+          <thead className="border-1 p-1 text-amber-400 ">
+            <th>OI</th>
+            <th>OI Chg</th>
+            <th className="text-wrap">Turnover Vol(Million)</th>
+            <th>Strike Price</th>
+            <th className="text-wrap">Turnover Vol(Million)</th>
+            <th>OI Chg</th>
+            <th>OI</th>
+            <th>CE Change</th>
+            <th>PE Change</th>
+            <th>Status</th>
+          </thead>
+          <tbody className="text-center" emptyContent={"No rows to display."}>
             {dataArray}
-          </TableBody>
-        </Table>
+          </tbody>
+        </table>
       )}
     </div>
   );

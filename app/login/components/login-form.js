@@ -1,5 +1,20 @@
-import React, { useContext, useState } from "react";
-import { Button, Input, Link, Spinner } from "@nextui-org/react";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  Button,
+  Card,
+  CardBody,
+  Input,
+  Link,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Spinner,
+  Tab,
+  Tabs,
+  useDisclosure,
+} from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
@@ -9,6 +24,7 @@ export default function LoginForm(props) {
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
   const supabase = createClientComponentClient();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleSignIn = async () => {
     setLoading(true);
@@ -66,7 +82,17 @@ export default function LoginForm(props) {
         Log In
       </Button>
       <p className="text-center text-xs text-slate-400">
-        Don't have an account? <Link>Sign Up</Link>
+        Don't have an account? <Link className="text-sm">Sign Up</Link>
+      </p>
+      <p className="text-center text-xs text-slate-400">
+        <Button
+          as={Link}
+          variant="light"
+          className="bg-transparent"
+          href={"/reset-password"}
+        >
+          Forgot Password?
+        </Button>
       </p>
     </form>
   );
