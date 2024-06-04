@@ -17,12 +17,10 @@ function page() {
       <div className="crd-holder col-span-4 row-start-1 row-span-9 h-full">
         <ExpiryList />
         <Suspense fallback={<p>Loading...!</p>}>
-          <OiDataTable2/>
+          <OiDataTable2 />
         </Suspense>
       </div>
-      <div className="crd-holder col-span-1 row-span-9 row-start-1 h-full">
-        3
-      </div>
+      <div className="crd-holder col-span-1 row-span-9 row-start-1 h-full"></div>
     </div>
   );
 }

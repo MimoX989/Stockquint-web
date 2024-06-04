@@ -229,24 +229,7 @@ function oiDataTable() {
               </td>
             </>
           ) : null}
-          {/* <TableCell
-            rowSpan={index == 0 || index == 5 ? 4 : null}
-            className={
-              items.strike == atm || index == 0 || index == 5 ? `border-1` : ``
-            }
-          ></TableCell>
-          <TableCell
-            rowSpan={index == 0 || index == 5 ? 4 : null}
-            className={
-              items.strike == atm || index == 0 || index == 5 ? `border-1` : ``
-            }
-          ></TableCell>
-          <TableCell
-            rowSpan={index == 0 || index == 5 ? 4 : null}
-            className={
-              items.strike == atm || index == 0 || index == 5 ? `border-1` : ``
-            }
-          ></TableCell> */}
+        
         </tr>
       );
     });

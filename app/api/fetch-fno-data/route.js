@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
-import niftyData from "@/public/nifty.json";
+// import niftyData from "@/public/nifty.json";
 export async function POST(req, res) {
   const sym = await req.json();
   try {
-    // const result = await fetch(
-    //   `https://www.nseindia.com/api/option-chain-indices?symbol=` + sym.symbol
-    // );
+    const result = await fetch(
+      `https://www.nseindia.com/api/option-chain-indices?symbol=` + sym.symbol
+    );
 
-    const data = await niftyData;
+    const data = await result.json(); 
+    // const data = await niftyData; //Use for mock data purpose.
     // console.log({ data });
     return NextResponse.json(data);
   } catch (error) {

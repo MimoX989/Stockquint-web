@@ -105,7 +105,7 @@ function oiDataTable2() {
     setLoading(false);
     return strikeArray.map((items, index) => {
       let styleAtm = () => {
-        return items.strike == atm ? `bg-yellow-400 text-black` : ``;
+        return items.strike == atm ? `bg-yellow-400 text-black text-center` : `text-center`;
       };
       let styleTtvCE = () => {
         if (items.cettv == cettv1) {
@@ -144,110 +144,95 @@ function oiDataTable2() {
           return `border-1`;
         }
       };
+      let CEside = () => {
+        if (index == 0) {
+          return total_ceoi;
+        } else if (index == 4) {
+          return total_cecoi;
+        } else if (index == 5) {
+          return total_cemv;
+        }
+      };
+
+      let PEside = () => {
+        if (index == 0) {
+          return total_peoi;
+        } else if (index == 4) {
+          return total_pecoi;
+        } else if (index == 5) {
+          return total_pemv;
+        }
+      };
+
+      let ConClu = () => {
+        if (index == 0) {
+          if (total_ceoi > total_peoi) return "OI: Call Writing";
+          else return "OI: Put Writing";
+        } else if (index == 4) {
+          if (total_cecoi > total_pecoi) return "COI: Call Writing ";
+          else return "COI: Put Writing";
+        } else if (index == 5) {
+          if (total_cemv > total_pemv) return "MV: Call Writing";
+          else return "MV: Put Writing";
+        }
+      };
+
+let styleCEside=()=>{
+  if (index==0){
+    if (total_ceoi > total_peoi) return `bg-red-800 border-1 text-center`;
+    else return `border-1 text-center`;
+  }else if (index ==4){
+    if (total_cecoi > total_pecoi) return `bg-red-800 border-1 text-center`;
+    else return `border-1 text-center`;
+  }else if(index==5){
+    if (total_cemv > total_pemv) return `bg-red-800 border-1 text-center`;
+    else return `border-1 text-center`;
+  }
+}
+let stylePEside=()=>{
+  if (index==0){
+    if (total_peoi > total_ceoi) return `bg-blue-700 border-1`;
+    else return `border-1`;
+  }else if (index ==4){
+    if (total_pecoi > total_cecoi) return `bg-blue-700 border-1`;
+    else return `border-1`;
+  }else if(index==5){
+    if (total_pemv > total_cemv) return `bg-blue-700 border-1`;
+    else return `border-1`;
+  }
+}
 
       return (
-        <tr>
-          <td className="border-1">{items.ceoi}</td>
-          <td className={styleCoiCE()}>{items.cecoi}</td>
-          <td className={styleTtvCE()}>{items.cettv}</td>
-          <td className={styleAtm()}>{items.strike}</td>
-          <td className={styleTtvPE()}>{items.pettv}</td>
-          <td className={styleCoiPE()}>{items.pecoi}</td>
-          <td className="border-1">{items.peoi}</td>
-          {index == 0 ? (
-            <>
-              <td
-                rowSpan="4"
-                className={
-                  total_ceoi > total_peoi ? `bg-blue-500 border-1` : `border-1`
-                }
-              >
-                {total_ceoi}
-              </td>
-              <td
-                rowSpan="4"
-                className={
-                  total_peoi > total_ceoi ? `bg-red-700 border-1` : `border-1`
-                }
-              >
-                {total_peoi}
-              </td>
-              <td rowSpan="4" className="border-1">
-                {total_ceoi > total_peoi
-                  ? "OI: Call Writing"
-                  : "OI: Put Writing"}
-              </td>
-            </>
-          ) : null}
-          {index == 4 ? (
-            <>
-              <td
-                className={
-                  total_cecoi > total_pecoi
-                    ? `bg-blue-500 border-1`
-                    : `border-1`
-                }
-              >
-                {total_cecoi}
-              </td>
-              <td
-                className={
-                  total_pecoi > total_cecoi ? `bg-red-700 border-1` : `border-1`
-                }
-              >
-                {total_pecoi}
-              </td>
-              <td className="border-1">
-                {total_cecoi > total_pecoi
-                  ? "COI: Call Writing"
-                  : "COI: Put Writing"}
-              </td>
-            </>
-          ) : null}
-          {index == 5 ? (
-            <>
-              <td
-                rowSpan="4"
-                className={
-                  total_cemv > total_pemv ? `bg-blue-500 border-1` : `border-1`
-                }
-              >
-                {total_cemv}
-              </td>
-              <td
-                rowSpan="4"
-                className={
-                  total_pemv > total_cemv ? `bg-red-700 border-1` : `border-1`
-                }
-              >
-                {total_pemv}
-              </td>
-              <td rowSpan="4" className="border-1">
-                {total_cemv > total_pemv
-                  ? "MV: Call Writing"
-                  : "MV: Put Writing"}
-              </td>
-            </>
-          ) : null}
-          {/* <TableCell
-            rowSpan={index == 0 || index == 5 ? 4 : null}
-            className={
-              items.strike == atm || index == 0 || index == 5 ? `border-1` : ``
-            }
-          ></TableCell>
+        <TableRow key={items.strike}>
+          <TableCell className="border-1">{items.ceoi}</TableCell>
+          <TableCell className={styleCoiCE()}>{items.cecoi}</TableCell>
+          <TableCell className={styleTtvCE()}>{items.cettv}</TableCell>
+          <TableCell className={styleAtm()}>{items.strike}</TableCell>
+          <TableCell className={styleTtvPE()}>{items.pettv}</TableCell>
+          <TableCell className={styleCoiPE()}>{items.pecoi}</TableCell>
+          <TableCell className="text-end border-1">{items.peoi}</TableCell>
           <TableCell
-            rowSpan={index == 0 || index == 5 ? 4 : null}
-            className={
-              items.strike == atm || index == 0 || index == 5 ? `border-1` : ``
-            }
-          ></TableCell>
+            rowSpan={index == 0 || index == 5 ? `4` : null}
+            hidden={index == 0 || index == 4 || index == 5 ? false : true}
+            className={styleCEside()}
+          >
+            {CEside()}
+          </TableCell>
           <TableCell
-            rowSpan={index == 0 || index == 5 ? 4 : null}
-            className={
-              items.strike == atm || index == 0 || index == 5 ? `border-1` : ``
-            }
-          ></TableCell> */}
-        </tr>
+            rowSpan={index == 0 || index == 5 ? `4` : null}
+            hidden={index == 0 || index == 4 || index == 5 ? false : true}
+            className={stylePEside()}
+          >
+            {PEside()}
+          </TableCell>
+          <TableCell
+            rowSpan={index == 0 || index == 5 ? `4` : null}
+            hidden={index == 0 || index == 4 || index == 5 ? false : true}
+            className="border-1"
+          >
+            {ConClu()}
+          </TableCell>
+        </TableRow>
       );
     });
   }
@@ -260,23 +245,27 @@ function oiDataTable2() {
           <InfinitySpin width="100" height="100" />
         </div>
       ) : (
-        <table fullWidth layout="fixed">
-          <thead className="border-1 p-1 text-amber-400 ">
-            <th>OI</th>
-            <th>OI Chg</th>
-            <th className="text-wrap">Turnover Vol(Million)</th>
-            <th>Strike Price</th>
-            <th className="text-wrap">Turnover Vol(Million)</th>
-            <th>OI Chg</th>
-            <th>OI</th>
-            <th>CE Change</th>
-            <th>PE Change</th>
-            <th>Status</th>
-          </thead>
-          <tbody className="text-center" emptyContent={"No rows to display."}>
+        <Table fullWidth layout="fixed">
+          <TableHeader className="border-1 p-1 text-amber-400 ">
+            <TableColumn align="start">OI</TableColumn>
+            <TableColumn align="start">OI Chg</TableColumn>
+            <TableColumn align="start" className="text-wrap">
+              Turnover Vol(Million)
+            </TableColumn>
+            <TableColumn align="center">Strike Price</TableColumn>
+            <TableColumn align="end" className="text-wrap">
+              Turnover Vol(Million)
+            </TableColumn>
+            <TableColumn align="end">OI Chg</TableColumn>
+            <TableColumn align="end">OI</TableColumn>
+            <TableColumn align="center">CE Change</TableColumn>
+            <TableColumn align="center">PE Change</TableColumn>
+            <TableColumn align="center">Status</TableColumn>
+          </TableHeader>
+          <TableBody emptyContent={"No rows to display."}>
             {dataArray}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       )}
     </div>
   );
